@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>shareanything</title>
+<meta name="theme-color" content="#c9b6ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1033;--lilac:#c9b6ff;--pink:#ff5ca8;--lime:#c8ff3d;--sky:#5ce1ff;--paper:#fff8ee;
+--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{font-family:var(--body);color:var(--ink);background:var(--lilac);
+background-image:radial-gradient(var(--ink) 1px,transparent 1.5px);background-size:26px 26px;background-position:0 0;
+min-height:100vh;padding:20px 16px 60px;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:var(--lilac);opacity:.88;z-index:-1}
+.blob{position:fixed;z-index:-1;border:3px solid var(--ink);animation:float 9s ease-in-out infinite}
+.b1{width:90px;height:90px;background:var(--lime);border-radius:50%;top:12%;left:4%}
+.b2{width:70px;height:70px;background:var(--pink);top:62%;right:5%;border-radius:18px;animation-delay:-3s}
+.b3{width:56px;height:56px;background:var(--sky);bottom:8%;left:10%;border-radius:50% 50% 50% 0;animation-delay:-6s}
+@keyframes float{50%{transform:translateY(-22px) rotate(14deg)}}
+main{max-width:640px;margin:0 auto}
+header{text-align:center;padding:18px 0 22px}
+.logo{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,11vw,4.2rem);letter-spacing:-.04em;line-height:1;cursor:pointer;display:inline-block}
+.logo span{display:inline-block;animation:wave 1.4s ease-in-out 1 both}
+@keyframes wave{0%{transform:translateY(30px) rotate(-12deg);opacity:0}60%{transform:translateY(-8px) rotate(4deg);opacity:1}100%{transform:none;opacity:1}}
+.tag{display:inline-block;background:var(--lime);border:3px solid var(--ink);border-radius:999px;padding:4px 14px;font-weight:600;font-size:.9rem;transform:rotate(-3deg);margin-top:10px;box-shadow:3px 3px 0 var(--ink)}
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--ink);padding:24px}
+h2{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:8px}
+p.sub{font-size:1.05rem;line-height:1.5;margin-bottom:20px}
+.btn{font-family:var(--display);font-weight:800;font-size:1.1rem;border:3px solid var(--ink);border-radius:16px;padding:14px 20px;background:var(--lime);color:var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;min-height:52px}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn.pink{background:var(--pink)}.btn.sky{background:var(--sky)}.btn.plain{background:var(--paper)}
+.btn.big{width:100%;font-size:1.3rem;padding:18px}
+.btn.small{font-size:.9rem;padding:8px 14px;min-height:40px;box-shadow:3px 3px 0 var(--ink)}
+:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+.or{display:flex;align-items:center;gap:12px;margin:20px 0;font-weight:600}
+.or::before,.or::after{content:"";flex:1;height:3px;background:var(--ink);border-radius:3px}
+.join{display:flex;gap:12px}
+input.code{flex:1;min-width:0;font-family:var(--display);font-weight:800;font-size:1.6rem;text-transform:uppercase;letter-spacing:.3em;text-align:center;border:3px solid var(--ink);border-radius:16px;background:#fff;padding:10px;color:var(--ink)}
+.err{background:var(--pink);border:3px solid var(--ink);border-radius:14px;padding:10px 14px;margin-top:16px;font-weight:600;animation:pop .35s}
+.tiles{display:flex;gap:10px;justify-content:center;margin:4px 0 14px}
+.tile{width:clamp(56px,17vw,84px);aspect-ratio:1;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:clamp(2rem,9vw,3.2rem);border:3px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);animation:bounce .7s cubic-bezier(.3,1.6,.5,1) both}
+.tile:nth-child(1){background:var(--lime);--r:-5deg}.tile:nth-child(2){background:var(--sky);--r:4deg;animation-delay:.1s}
+.tile:nth-child(3){background:var(--pink);--r:-3deg;animation-delay:.2s}.tile:nth-child(4){background:#ffd23f;--r:6deg;animation-delay:.3s}
+@keyframes bounce{0%{transform:translateY(-120px) scale(.4) rotate(40deg);opacity:0}100%{transform:rotate(var(--r));opacity:1}}
+.bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-bottom:16px}
+.pill{border:3px solid var(--ink);border-radius:999px;padding:5px 14px;font-weight:600;background:#fff;display:inline-flex;align-items:center;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%;background:#ffb020;border:2px solid var(--ink)}
+.pill.ok .dot{background:#2bd96b;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(43,217,107,.25)}}
+#qr{display:flex;justify-content:center;margin:0 0 16px}
+#qr img,#qr canvas{border:3px solid var(--ink);border-radius:14px;padding:8px;background:var(--paper)}
+.composer{margin-top:20px}
+textarea{width:100%;min-height:110px;resize:vertical;border:3px solid var(--ink);border-radius:16px;padding:14px;font:inherit;font-size:1.05rem;background:#fff;color:var(--ink)}
+.row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}.row .btn{flex:1}
+.drop{margin-top:12px;border:3px dashed var(--ink);border-radius:16px;padding:14px;text-align:center;font-weight:600;transition:background .15s,transform .15s}
+.drop.over{background:var(--sky);transform:scale(1.02)}
+.feed{margin-top:22px;display:flex;flex-direction:column;gap:14px}
+.empty{text-align:center;font-weight:600;padding:18px 0}
+.item{border:3px solid var(--ink);border-radius:18px;padding:14px;background:#fff;box-shadow:4px 4px 0 var(--ink);animation:pop .4s cubic-bezier(.3,1.5,.5,1) both}
+.item.me{background:#e9ffa8}
+@keyframes pop{0%{transform:scale(.7) translateY(20px);opacity:0}100%{transform:none;opacity:1}}
+.who{font-size:.8rem;font-weight:600;margin-bottom:6px}
+.txt{white-space:pre-wrap;word-break:break-word;line-height:1.5;font-size:1.05rem}
+.item img{max-width:100%;border-radius:12px;border:3px solid var(--ink);display:block;margin-bottom:10px}
+.acts{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.strip{margin-top:34px;border:3px solid var(--ink);border-radius:14px;background:var(--ink);color:var(--lime);overflow:hidden;white-space:nowrap;font-family:var(--display);font-weight:800;padding:8px 0}
+.strip div{display:inline-block;animation:slide 18s linear infinite}
+@keyframes slide{to{transform:translateX(-50%)}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,100px);background:var(--ink);color:var(--lime);font-weight:600;padding:12px 22px;border-radius:999px;transition:transform .3s cubic-bezier(.3,1.6,.5,1);z-index:9}
+.toast.show{transform:translate(-50%,0)}
+.foot{text-align:center;margin-top:22px;font-size:.9rem;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<main>
+  <header>
+    <div class="logo" id="logo" tabindex="0" role="link" aria-label="shareanything home"></div><br>
+    <div class="tag">free · no sign-up · any device</div>
+  </header>
+
+  <section class="card" id="home">
+    <h2>Send stuff to your other device.</h2>
+    <p class="sub">Text, links, photos and files. Make a room, then enter the 4-letter code (or scan the QR) on your phone or laptop.</p>
+    <button class="btn big" id="create">Make a room</button>
+    <div class="or">or</div>
+    <form class="join" id="joinForm">
+      <input class="code" id="codeIn" maxlength="4" placeholder="CODE" autocomplete="off" autocapitalize="characters" aria-label="Room code">
+      <button class="btn pink" type="submit">Join</button>
+    </form>
+    <div class="err" id="err" hidden></div>
+  </section>
+
+  <section class="card" id="room" hidden>
+    <div class="tiles" id="tiles" aria-label="Room code"></div>
+    <div class="bar">
+      <span class="pill" id="status"><span class="dot"></span><span id="statusTxt">Starting…</span></span>
+      <button class="btn small plain" id="copyLink">Copy link</button>
+      <button class="btn small plain" id="leave">Leave</button>
+    </div>
+    <div id="qr"></div>
+
+    <div class="composer" id="composer">
+      <textarea id="msg" placeholder="Type or paste something to share…" aria-label="Message"></textarea>
+      <div class="row">
+        <button class="btn pink" id="send">Send</button>
+        <button class="btn sky" id="pick">Add files</button>
+      </div>
+      <div class="drop" id="drop">or drop files here · paste images with Ctrl+V</div>
+      <input type="file" id="file" multiple hidden>
+    </div>
+
+    <div class="feed" id="feed"><div class="empty" id="empty">Nothing here yet. Send the first thing ✨</div></div>
+  </section>
+
+  <div class="strip" aria-hidden="true"><div id="marquee"></div></div>
+  <p class="foot">Devices connect directly to each other. Nothing is stored on a server.</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const ALPHA='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',PFX='shareanything-',MAX=25*1024*1024;
+let peer,isHost=false,conns=[],code='';
+
+// wordmark + marquee
+$('#logo').innerHTML=[...'shareanything'].map((c,i)=>`<span style="animation-delay:${i*60}ms">${c}</span>`).join('');
+$('#marquee').textContent=('text ✦ links ✦ photos ✦ files ✦ '.repeat(10));
+
+const rnd=()=>Array.from({length:4},()=>ALPHA[Math.floor(Math.random()*ALPHA.length)]).join('');
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800)}
+function showErr(m){const e=$('#err');e.textContent=m;e.hidden=false}
+function view(v){$('#home').hidden=v!=='home';$('#room').hidden=v!=='room'}
+function status(t,ok){$('#statusTxt').textContent=t;$('#status').classList.toggle('ok',!!ok)}
+function link(){return location.origin+location.pathname+'#'+code}
+
+function enterRoom(){
+  $('#err').hidden=true;
+  $('#tiles').innerHTML=[...code].map(c=>`<div class="tile">${c}</div>`).join('');
+  $('#qr').innerHTML='';
+  try{new QRCode($('#qr'),{text:link(),width:140,height:140,colorDark:'#1a1033',colorLight:'#fff8ee'})}catch(e){}
+  history.replaceState(null,'','#'+code);
+  view('room');
+}
+function fail(m){
+  if(peer)peer.destroy();
+  view('home');showErr(typeof m==='string'?m:'Could not connect. Check your internet and try again.');
+}
+
+function createRoom(tries=0){
+  code=rnd();isHost=true;conns=[];
+  peer=new Peer(PFX+code);
+  peer.on('open',()=>{enterRoom();status('Waiting for another device…')});
+  peer.on('connection',c=>{
+    c.on('open',()=>{conns.push(c);status(conns.length+(conns.length>1?' devices':' device')+' connected',true)});
+    c.on('data',d=>{receive(d);conns.forEach(o=>o!==c&&o.open&&o.send(d))});
+    c.on('close',()=>{conns=conns.filter(x=>x!==c);status(conns.length?conns.length+' connected':'Waiting for another device…',conns.length>0)});
+  });
+  peer.on('error',e=>{if(e.type==='unavailable-id'&&tries<5){peer.destroy();createRoom(tries+1)}else fail()});
+}
+function joinRoom(c){
+  code=c.toUpperCase();isHost=false;conns=[];
+  peer=new Peer();
+  peer.on('open',()=>{
+    enterRoom();status('Connecting…');
+    const conn=peer.connect(PFX+code,{reliable:true});conns=[conn];
+    conn.on('open',()=>status('Connected',true));
+    conn.on('data',receive);
+    conn.on('close',()=>status('Host left the room'));
+  });
+  peer.on('error',e=>fail(e.type==='peer-unavailable'?`No room with code ${code}. Check the code and try again.`:undefined));
+}
+function leave(){if(peer)peer.destroy();conns=[];history.replaceState(null,'','#');$('#feed').innerHTML='<div class="empty" id="empty">Nothing here yet. Send the first thing ✨</div>';$('#qr').innerHTML='';view('home')}
+
+function broadcast(d){const open=conns.filter(c=>c.open);if(!open.length){toast('No device connected yet');return false}open.forEach(c=>c.send(d));return true}
+function sendText(){const t=$('#msg').value.trim();if(!t)return;if(broadcast({t:'text',text:t})){addItem({t:'text',text:t},true);$('#msg').value=''}}
+async function sendFiles(files){
+  for(const f of files){
+    if(f.size>MAX){toast(f.name+' is over 25 MB');continue}
+    const data=await f.arrayBuffer(),m={t:'file',name:f.name||'pasted-image.png',type:f.type,size:f.size,data};
+    if(broadcast(m))addItem(m,true)
+  }
+}
+function receive(d){addItem(d,false)}
+
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('Copied!')}
+function mk(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function addItem(d,me){
+  const e=$('#empty');if(e)e.remove();
+  const it=mk('div','item'+(me?' me':'')),acts=mk('div','acts');
+  it.append(mk('div','who',me?'You':'Other device'));
+  if(d.t==='text'){
+    it.append(mk('div','txt',d.text));
+    const b=mk('button','btn small sky','Copy');b.onclick=()=>copy(d.text);acts.append(b);
+    if(/^https?:\/\/\S+$/.test(d.text)){const a=mk('a','btn small pink','Open');a.href=d.text;a.target='_blank';a.rel='noopener';a.style.textDecoration='none';a.style.display='inline-grid';a.style.placeItems='center';acts.append(a)}
+  }else{
+    const blob=new Blob([d.data],{type:d.type}),url=URL.createObjectURL(blob);
+    if((d.type||'').startsWith('image/')){const i=new Image();i.src=url;i.alt=d.name;it.append(i)}
+    it.append(mk('div','txt',`${d.name} (${(d.size/1024<1024?Math.round(d.size/1024)+' KB':(d.size/1048576).toFixed(1)+' MB')})`));
+    const a=mk('a','btn small lime','Download');a.href=url;a.download=d.name;a.style.textDecoration='none';a.style.display='inline-grid';a.style.placeItems='center';acts.append(a);
+  }
+  it.append(acts);$('#feed').prepend(it);
+}
+
+// events
+$('#create').onclick=()=>{$('#err').hidden=true;createRoom()};
+$('#joinForm').onsubmit=e=>{e.preventDefault();const c=$('#codeIn').value.trim();if(c.length!==4)return showErr('Enter the 4-letter code.');$('#err').hidden=true;joinRoom(c)};
+$('#send').onclick=sendText;
+$('#msg').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))sendText()});
+$('#pick').onclick=()=>$('#file').click();
+$('#file').onchange=e=>{sendFiles([...e.target.files]);e.target.value=''};
+$('#copyLink').onclick=()=>copy(link());
+$('#leave').onclick=leave;
+$('#logo').onclick=()=>{if(!$('#room').hidden)leave()};
+const dz=$('#drop');
+['dragenter','dragover'].forEach(n=>document.addEventListener(n,e=>{e.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(n=>document.addEventListener(n,e=>{e.preventDefault();dz.classList.remove('over')}));
+document.addEventListener('drop',e=>{if(!$('#room').hidden&&e.dataTransfer.files.length)sendFiles([...e.dataTransfer.files])});
+document.addEventListener('paste',e=>{if($('#room').hidden)return;const f=[...(e.clipboardData?.files||[])];if(f.length){e.preventDefault();sendFiles(f)}});
+
+// open a shared link like site.com/#AB3K
+if(/^#[A-Za-z0-9]{4}$/.test(location.hash))joinRoom(location.hash.slice(1));
+</script>
+</body>
+</html>

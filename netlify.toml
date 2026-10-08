@@ -1,0 +1,4 @@
+# Optional: Netlify (drag & drop or connect repo)
+[build]
+  command = "npm run build"
+  publish = "dist"

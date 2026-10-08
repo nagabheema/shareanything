@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build (only if package.json exists)
+        run: |
+          if [ -f package.json ]; then
+            npm ci || npm install
+            npm run build --if-present
+          fi
+      - name: Pick output folder
+        id: out
+        run: |
+          if [ -d dist ]; then echo "path=dist" >> $GITHUB_OUTPUT
+          elif [ -d build ]; then echo "path=build" >> $GITHUB_OUTPUT
+          else echo "path=." >> $GITHUB_OUTPUT; fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.out.outputs.path }}
+      - id: deployment
+        uses: actions/deploy-pages@v4
